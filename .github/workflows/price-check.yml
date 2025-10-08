@@ -19,10 +19,12 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Restore state
+        id: cache-state
         uses: actions/cache@v3
         with:
           path: state.json
-          key: octopus-price-state-${{ github.ref }}
+          key: octopus-price-state-${{ github.run_id }}-${{ github.run_number }}
+          restore-keys: octopus-price-state-
 
       - name: Run price script
         env:
@@ -33,7 +35,8 @@ jobs:
         run: python octopus_price_bot.py
 
       - name: Save state
+        if: always()
         uses: actions/cache/save@v3
         with:
           path: state.json
-          key: octopus-price-state-${{ github.ref }}
+          key: octopus-price-state-${{ github.run_id }}-${{ github.run_number }}
