@@ -1,0 +1,41 @@
+name: Octopus Price Check
+on:
+  schedule:
+    - cron: "0 * * * *" # every hour at minute 0 (UTC)
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Restore state
+        uses: actions/cache@v3
+        with:
+          path: state.json
+          key: octopus-price-state-${{ github.ref }}
+
+      - name: Run price script
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TARGET_ELECTRICITY_PRICE: ${{ secrets.TARGET_ELECTRICITY_PRICE }}
+          ELECTRICITY_TARIFF_URL: ${{ secrets.ELECTRICITY_TARIFF_URL }}
+          TARGET_GAS_PRICE: ${{ secrets.TARGET_GAS_PRICE }}
+          GAS_TARIFF_URL: ${{ secrets.GAS_TARIFF_URL }}
+        run: python octopus_price_bot.py
+
+      - name: Save state
+        uses: actions/cache/save@v3
+        with:
+          path: state.json
+          key: octopus-price-state-${{ github.ref }}
