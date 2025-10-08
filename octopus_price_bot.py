@@ -14,15 +14,11 @@ TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
 # Electricity price monitoring
 TARGET_ELECTRICITY_PRICE = float(os.getenv("TARGET_ELECTRICITY_PRICE", "0.11"))
-ELECTRICITY_TARIFF_URL = os.getenv(
-    "ELECTRICITY_TARIFF_URL", "https://octopusenergy.it/le-nostre-tariffe"
-)
+ELECTRICITY_TARIFF_URL = "https://octopusenergy.it/le-nostre-tariffe"
 
 # Gas price monitoring
 TARGET_GAS_PRICE = float(os.getenv("TARGET_GAS_PRICE", "0.85"))
-GAS_TARIFF_URL = os.getenv(
-    "GAS_TARIFF_URL", "https://octopusenergy.it/le-nostre-tariffe"
-)
+GAS_TARIFF_URL = "https://octopusenergy.it/le-nostre-tariffe"
 
 STATE_FILE = Path("state.json")
 

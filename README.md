@@ -42,14 +42,8 @@ pip install -r requirements.txt
 ```bash
 TELEGRAM_TOKEN=123456:ABC-xyz
 TELEGRAM_CHAT_ID=123456789
-
-# Electricity price monitoring
 TARGET_ELECTRICITY_PRICE=0.110    # €/kWh — your current electricity rate
-ELECTRICITY_TARIFF_URL=https://octopusenergy.it/le-nostre-tariffe
-
-# Gas price monitoring
-TARGET_GAS_PRICE=0.850    # €/Smc — your current gas rate
-GAS_TARIFF_URL=https://octopusenergy.it/le-nostre-tariffe
+TARGET_GAS_PRICE=0.850            # €/Smc — your current gas rate
 ```
 
 Alternatively, export them as environment variables:
@@ -75,14 +69,12 @@ If the script finds a price below your target, you’ll get a Telegram notificat
 2. Go to **Settings → Secrets and variables → Actions → New repository secret**
 3. Add the following secrets:
 
-  | Secret Name                | Description                           |
-  | -------------------------- | ------------------------------------- |
-  | `TELEGRAM_TOKEN`           | Your Telegram bot token               |
-  | `TELEGRAM_CHAT_ID`         | Your Telegram chat ID                 |
+  | Secret Name                | Description                             |
+  | -------------------------- | --------------------------------------- |
+  | `TELEGRAM_TOKEN`           | Your Telegram bot token                 |
+  | `TELEGRAM_CHAT_ID`         | Your Telegram chat ID                   |
   | `TARGET_ELECTRICITY_PRICE` | Your current electricity price in €/kWh |
-  | `ELECTRICITY_TARIFF_URL`   | URL of the electricity tariffs page   |
-  | `TARGET_GAS_PRICE`         | Your current gas price in €/Smc      |
-  | `GAS_TARIFF_URL`           | URL of the gas tariffs page           |
+  | `TARGET_GAS_PRICE`         | Your current gas price in €/Smc         |
 
 4. The repo includes a preconfigured workflow:
    `.github/workflows/price-check.yml`

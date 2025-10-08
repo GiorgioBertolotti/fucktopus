@@ -29,9 +29,7 @@ jobs:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           TARGET_ELECTRICITY_PRICE: ${{ secrets.TARGET_ELECTRICITY_PRICE }}
-          ELECTRICITY_TARIFF_URL: ${{ secrets.ELECTRICITY_TARIFF_URL }}
           TARGET_GAS_PRICE: ${{ secrets.TARGET_GAS_PRICE }}
-          GAS_TARIFF_URL: ${{ secrets.GAS_TARIFF_URL }}
         run: python octopus_price_bot.py
 
       - name: Save state
