@@ -121,9 +121,8 @@ def fetch_price_by_scraping(url, price_type="electricity"):
         return None
 
 
-def check_price(price_type, tariff_url, target_price):
+def check_price(price_type, tariff_url, target_price, state):
     """Check price for either electricity or gas and send alert if needed"""
-    state = load_state()
 
     # Scrape the tariff URL
     logging.info("Scraping %s for %s", tariff_url, price_type)
@@ -168,11 +167,13 @@ def main():
 
     # Check electricity price
     logging.info("=== Checking Electricity Price ===")
-    state = check_price("electricity", ELECTRICITY_TARIFF_URL, TARGET_ELECTRICITY_PRICE)
+    state = check_price(
+        "electricity", ELECTRICITY_TARIFF_URL, TARGET_ELECTRICITY_PRICE, state
+    )
 
     # Check gas price
     logging.info("=== Checking Gas Price ===")
-    state = check_price("gas", GAS_TARIFF_URL, TARGET_GAS_PRICE)
+    state = check_price("gas", GAS_TARIFF_URL, TARGET_GAS_PRICE, state)
 
     # Save updated state
     save_state(state)
